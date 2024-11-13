@@ -1,28 +1,16 @@
-/* {
-  "compilerOptions": {
-    "rootDirs": ["src"],
-    "outDir": "dist",
-    "lib": ["es2020"],
-    "target": "es2020",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "types": ["node"],
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
-  }
-} */
 {
   "compilerOptions": {
-    "rootDir": "./src", // Set this to direct the output to dist/
+    "rootDir": "src",
     "outDir": "dist",
     "lib": ["es2020"],
     "target": "es2020",
     "module": "esnext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "types": ["node"],
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
-  }
+    "strict": true
+  },
+  "include": ["src/**/*"]
 }

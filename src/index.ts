@@ -2,8 +2,8 @@ import "reflect-metadata";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { buildSchema } from "type-graphql";
-import { BookResolver } from "./graphQl/book/bookResolvers.js";
-
+import { BookResolver } from "./graphQl/book/book.resolvers.js";
+import { UserResolver } from "./graphQl/user/user.resolvers.js";
 /* @ObjectType()
 class Book {
   @Field(() => ID)
@@ -58,7 +58,7 @@ class BookResolver {
 } */
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [BookResolver],
+    resolvers: [BookResolver, UserResolver],
   });
 
   const server = new ApolloServer({ schema });

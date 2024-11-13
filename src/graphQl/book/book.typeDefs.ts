@@ -1,7 +1,5 @@
 import { ObjectType } from "type-graphql";
-
 import { ID } from "type-graphql";
-
 import { Field } from "type-graphql";
 
 @ObjectType()
