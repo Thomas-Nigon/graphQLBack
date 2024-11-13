@@ -1,4 +1,4 @@
-import { User } from "../graphQl/user/user.typeDefs";
+/* import { User } from "../graphQl/user/user.typeDefs";
 
 export const users: User[] = [
   {
@@ -12,3 +12,4 @@ export const users: User[] = [
     email: "jane@wick.com",
   },
 ];
+ */

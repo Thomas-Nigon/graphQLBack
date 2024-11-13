@@ -9,7 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Field } from "type-graphql";
 import { InputType } from "type-graphql";
-let UserInput = class UserInput {
+import { BaseEntity } from "typeorm";
+let UserInput = class UserInput extends BaseEntity {
 };
 __decorate([
     Field(),

@@ -10,21 +10,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { ObjectType } from "type-graphql";
 import { ID } from "type-graphql";
 import { Field } from "type-graphql";
-let Book = class Book {
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+let Book = class Book extends BaseEntity {
 };
 __decorate([
     Field(() => ID),
+    PrimaryGeneratedColumn(),
     __metadata("design:type", String)
 ], Book.prototype, "id", void 0);
 __decorate([
     Field(),
+    Column(),
     __metadata("design:type", String)
 ], Book.prototype, "title", void 0);
 __decorate([
     Field(),
+    Column(),
     __metadata("design:type", String)
 ], Book.prototype, "author", void 0);
 Book = __decorate([
+    Entity(),
     ObjectType()
 ], Book);
 export { Book };

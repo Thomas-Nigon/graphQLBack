@@ -4,58 +4,11 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { buildSchema } from "type-graphql";
 import { BookResolver } from "./graphQl/book/book.resolvers.js";
 import { UserResolver } from "./graphQl/user/user.resolvers.js";
-/* @ObjectType()
-class Book {
-  @Field(() => ID)
-  id: string;
-  @Field()
-  title: string;
-  @Field()
-  author: string;
-}
+/* import { DataSource } from "typeorm";
+import { Book } from "./graphQl/book/book.typeDefs.js";
+import { User } from "./graphQl/user/user.typeDefs.js"; */
+import { dataSource } from "./config/db.js";
 
-const books: Book[] = [
-  {
-    title: "The Awakening",
-    author: "Kate Chopin",
-    id: "1",
-  },
-  {
-    title: "City of Glass",
-    author: "Paul Auster",
-    id: "2",
-  },
-];
-
-@InputType()
-class BookInput {
-  @Field()
-  title: string;
-
-  @Field()
-  author: string;
-}
-
-@Resolver(Book)
-class BookResolver {
-  @Query(() => [Book])
-  books() {
-    return books;
-  }
-
-  @Query(() => Book)
-  getBookById(@Arg("id") id: string) {
-    return books.find((book) => book.id == id);
-  }
-
-  @Mutation(() => Book)
-  addBook(@Arg("data") { title, author }: BookInput) {
-    const lastId = parseInt(books.at(-1).id, 10);
-    const id = (lastId + 1).toString();
-    books.push({ title, author, id });
-    return books.at(-1);
-  }
-} */
 const main = async () => {
   const schema = await buildSchema({
     resolvers: [BookResolver, UserResolver],
@@ -66,6 +19,8 @@ const main = async () => {
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
   });
+
+  await dataSource.initialize();
 
   console.log(`🚀  Server ready at: ${url}`);
 };

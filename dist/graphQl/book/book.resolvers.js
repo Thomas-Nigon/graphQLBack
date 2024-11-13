@@ -14,40 +14,40 @@ import { Arg, Mutation, Query } from "type-graphql";
 import { Resolver } from "type-graphql";
 import { BookInput } from "./book.inputs.js";
 import { Book } from "./book.typeDefs.js";
-import { books } from "../../data/books.js";
 let BookResolver = class BookResolver {
-    getBooks() {
+    async getBooks() {
+        const books = await Book.find();
         return books;
     }
-    getBookById(id) {
-        return books.find((book) => book.id == id);
+    async getBookById(id) {
+        const book = await Book.findOneBy({ id });
+        return book;
     }
-    addBook({ title, author }) {
-        const lastId = parseInt(books.at(-1)?.id ?? "0", 10);
-        const id = (lastId + 1).toString();
-        books.push({ title, author, id });
-        return books.at(-1);
+    async addBook({ title, author }) {
+        const book = await Book.create({ title, author });
+        await book.save();
+        return book;
     }
 };
 __decorate([
     Query(() => [Book]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], BookResolver.prototype, "getBooks", null);
 __decorate([
     Query(() => Book),
     __param(0, Arg("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], BookResolver.prototype, "getBookById", null);
 __decorate([
     Mutation(() => Book),
     __param(0, Arg("data")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [BookInput]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], BookResolver.prototype, "addBook", null);
 BookResolver = __decorate([
     Resolver(Book)

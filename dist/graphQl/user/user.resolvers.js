@@ -13,41 +13,40 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 import { Arg, Mutation, Query } from "type-graphql";
 import { Resolver } from "type-graphql";
 import { User } from "./user.typeDefs.js";
-import { users } from "../../data/users.js";
+//import { users } from "../../data/users.js";
 import { UserInput } from "./user.inputs.js";
 let UserResolver = class UserResolver {
-    getUsers() {
-        return users;
+    async getUsers() {
+        return await User.find();
     }
-    getUserById(id) {
-        return users.find((user) => user.id == id);
+    async getUserById(id) {
+        return await User.findOneBy({ id });
     }
-    addUser({ name, email }) {
-        const lastId = parseInt(users.at(-1)?.id ?? "0", 10);
-        const id = (lastId + 1).toString();
-        users.push({ name, email, id });
-        return users.at(-1);
+    async addUser({ name, email }) {
+        const user = await User.create({ name, email });
+        await user.save();
+        return user;
     }
 };
 __decorate([
     Query(() => [User]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "getUsers", null);
 __decorate([
     Query(() => User),
     __param(0, Arg("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "getUserById", null);
 __decorate([
     Mutation(() => User),
     __param(0, Arg("data")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [UserInput]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "addUser", null);
 UserResolver = __decorate([
     Resolver(User)

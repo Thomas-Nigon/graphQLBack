@@ -1,4 +1,4 @@
-import { Book } from "../graphQl/book/book.typeDefs";
+/* import { Book } from "../graphQl/book/book.typeDefs";
 
 export const books: Book[] = [
   {
@@ -12,3 +12,4 @@ export const books: Book[] = [
     id: "2",
   },
 ];
+ */
